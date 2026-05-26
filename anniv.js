@@ -63,18 +63,17 @@ function checkPin() {
         setTimeout(() => {
             document.getElementById("lock-screen").style.display = "none";
             
-            // Video Latar dimunculkan dan dimainkan hanya saat PIN Sukses
+            // --- Memunculkan Video secara elegan ---
             let videoBgElement = document.getElementById("video-bg");
             if (videoBgElement) {
-                videoBgElement.style.display = "block";
-                videoBgElement.play().catch(err => console.log("Play block:", err));
+                videoBgElement.style.visibility = "visible";
+                videoBgElement.style.opacity = "0.35";
             }
             
             let mainContent = document.getElementById("main-content");
             mainContent.style.display = "flex";
             mainContent.classList.add("fade-in-content");
             
-            // Jalankan efek dekripsi teks judul
             startDecryption('judul-misi', 'MISSION: HAPPY ANNIVERSARY!');
         }, 1000);
     } else {
@@ -85,7 +84,7 @@ function checkPin() {
     }
 }
 
-// 2. LOVE TIME COUNTER (Kalkulator Tanggal)
+// 2. LOVE TIME COUNTER
 const startDate = new Date("2025-06-05T00:00:00"); 
 
 setInterval(() => {
@@ -103,7 +102,7 @@ setInterval(() => {
     }
 }, 1000);
 
-// 3. EASTER EGG (Klik Gembok 5x)
+// 3. EASTER EGG
 let eggClicks = 0;
 function triggerEasterEgg() {
     eggClicks++;
@@ -130,7 +129,7 @@ function closeDetailedPolaroid() {
     setTimeout(() => { detailedView.style.display = "none"; }, 500);
 }
 
-// 5. KONTROL POP-UP VIDEO & MUSIK
+// 5. KONTROL POP-UP VIDEO
 const videoModal = document.getElementById("video-modal");
 const voiceVideo = document.getElementById("voice-video");
 const bgMusic = document.getElementById("bg-music");
@@ -155,9 +154,7 @@ if(voiceVideo && bgMusic) {
     voiceVideo.addEventListener("ended", () => { bgMusic.play(); });
 }
 
-// ====================================================================
-// 6. KODE REVISI: SISTEM BACKGROUND VIDEO BERGANTIAN (PLAYLIST INFINITE)
-// ====================================================================
+// 6. SISTEM BACKGROUND VIDEO BERGANTIAN (ANTI-ERROR & INFINITE LOOP)
 const backgroundVideos = [
     "latar1.mp4", 
     "latar2.mp4", 
@@ -170,20 +167,20 @@ const videoBg = document.getElementById("video-bg");
 if (videoBg) {
     videoBg.addEventListener("ended", () => {
         currentBgIndex++; 
-        
-        // Jika sudah melewati video terakhir, otomatis reset kembali ke video pertama
         if (currentBgIndex >= backgroundVideos.length) {
             currentBgIndex = 0;
         }
-        
-        // Mengubah source video, memaksa reload, lalu memutarnya lagi secara otomatis
         videoBg.src = backgroundVideos[currentBgIndex];
-        videoBg.load(); // <--- KODE KUNCI: Memaksa browser me-refresh video baru agar tidak macet
-        
-        // Memutar kembali video dengan penanganan error/blocking dari browser
-        videoBg.play().catch(error => {
-            console.log("Memutar ulang otomatis dipicu kembali.");
-            videoBg.play();
-        });
+        videoBg.load(); 
+        videoBg.play().catch(e => console.log("Restart tertahan:", e));
+    });
+
+    // Pengaman: Jika file video tidak ditemukan, kembali memutar video pertama
+    videoBg.addEventListener("error", () => {
+        console.log("Video tidak ditemukan, kembali memutar video pertama.");
+        currentBgIndex = 0;
+        videoBg.src = backgroundVideos[0];
+        videoBg.load();
+        videoBg.play().catch(e => console.log("Restart tertahan:", e));
     });
 }
