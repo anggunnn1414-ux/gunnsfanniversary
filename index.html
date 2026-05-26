@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anniversary Kita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="anniv.css">
+</head>
+<body>
+
+    <video muted id="video-bg" playsinline style="display: none;">
+        <source src="latar1.mp4" type="video/mp4">
+        Browser kamu tidak mendukung video latar belakang.
+    </video>
+
+    <audio id="bg-music" loop>
+        <source src="sempurna.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="lock-screen">
+        <h2>BRANKAS RAHASIA <span id="secret-lock" style="cursor:pointer;" onclick="triggerEasterEgg()">🔒</span></h2>
+        <div class="status" id="status-msg">STATUS: TERKUNCI</div>
+        <div id="pin-display">_ _ _ _ _ _</div>
+        
+        <div class="keypad">
+            <button class="btn" onclick="addNumber(1)">1</button>
+            <button class="btn" onclick="addNumber(2)">2</button>
+            <button class="btn" onclick="addNumber(3)">3</button>
+            <button class="btn" onclick="addNumber(4)">4</button>
+            <button class="btn" onclick="addNumber(5)">5</button>
+            <button class="btn" onclick="addNumber(6)">6</button>
+            <button class="btn" onclick="addNumber(7)">7</button>
+            <button class="btn" onclick="addNumber(8)">8</button>
+            <button class="btn" onclick="addNumber(9)">9</button>
+            <button class="btn btn-del" onclick="clearPin()">DEL</button>
+            <button class="btn" onclick="addNumber(0)">0</button>
+            <button class="btn btn-enter" onclick="checkPin()">ENTER</button>
+        </div>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        
+        <div class="floating-emojis">
+            <div class="emoji">💖</div>
+            <div class="emoji">🤪</div>
+            <div class="emoji">✨</div>
+            <div class="emoji">🥰</div>
+            <div class="emoji">🌸</div>
+            <div class="emoji">💖</div>
+        </div>
+
+        <div class="photo-gallery">
+            <div class="flip-card photo-1" onclick="showDetailedPolaroid('foto1.jpeg', 'Awal mula semua petualangan seru kita! ✨')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front polaroid">
+                        <img src="foto1.jpeg" alt="Foto 1">
+                        <p>First Date 🤍</p>
+                    </div>
+                    <div class="flip-card-back polaroid">
+                        <p class="back-text">Awal mula semua petualangan seru kita! ✨</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card photo-2" onclick="showDetailedPolaroid('foto2.jpeg', 'Selalu senyum kayak gini ya, cantik. 🥰')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front polaroid">
+                        <img src="foto2.jpeg" alt="Foto 2">
+                        <p>My Everything</p>
+                    </div>
+                    <div class="flip-card-back polaroid">
+                        <p class="back-text">Selalu senyum kayak gini ya, cantik. 🥰</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card photo-3" onclick="showDetailedPolaroid('foto3.jpeg', 'I love you more than words can say. 💖')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front polaroid">
+                        <img src="foto3.jpeg" alt="Foto 3">
+                        <p>Happy Anniv Sofia!</p>
+                    </div>
+                    <div class="flip-card-back polaroid">
+                        <p class="back-text">I love you more than words can say. 💖</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-content">
+            <h1 id="judul-misi">MISSION: HAPPY ANNIVERSARY!</h1>
+            <div class="mission-info">
+                <p>> TARGET: <span>SOFIA</span></p>
+                <p>> STATUS: <span>BERHASIL DIBUKA (AMAN)</span></p>
+            </div>
+            <div class="message-text">
+                <p>Kalau nabaca mi ini pesan, tandanya berhasil mi nabuka ini brankas rahasia. 😁</p>
+                <br>
+                <p>Selamat hari *Anniversary*, Sweety! 🤍</p>
+                <br>
+                <p>Ndak terasa di', sudah setahun mi sejak 5 Juni 2025. Perjalanan ta' ternyata lumayan panjang dan ndak selalu mulus. Ingat ki toh waktu akhir Juli kemarin kita sempat ada masalah, sampai akhirnya betul-betul *lost contact* dan pisah dari akhir Agustus sampai Oktober? Jujur, berat sekali kurasa waktu-waktu itu.</p>
+                <br>
+                <p>Tapi bersyukur sekali ka', pas tanggal 22 Oktober 2025, bisa ki' kembali sama-sama lagi. Dan yang paling bikin deg-degan tapi super *happy* itu pas akhirnya bisa ki' ketemu langsung untuk pertama kalinya di tanggal 13 Januari kemarin. Setelah sekian lama cuman bisa baku sapa lewat layar dan ngelewatin masa-masa putus itu, akhirnya bisa ka' liat senyum ta' secara langsung, dan bakalan kuingat terus pertemuan pertama ta yang pas turun dari motor mukanya muka-muka ketakutan haha mana suruhka pegang juga tangannya, ngambek ii kalo ditinggal i jalan duluan tapi pas kupegang tangannya malah tremor ji haha, lucu sekali klo kuingat.</p>
+                <br>
+                <p>Lucunya, pertemuan kedua ta' jatuh di tanggal 13 tonji, pas bulan Maret kemarin. Memang kayaknya angka 13 itu angka spesial sekali buat kita', hehe. Terus bulan Mei tanggal 1 kemarin bisa ki' luangkan waktu ketemu lagi, bikin memori baru sebelum akhirnya harus ki' kembali ke rutinitas dan nahan rindu karena LDR.</p>
+                <br>
+                <p>Makasih banyak di', Sayangkuu sudah mau terus bertahan dan berjuang sama-sama ngelewatin ini jarak. Walaupun sekarang harus ki' baku jauh lagi, tapi yakin ja' bisa ki' lewati semuanya sama-sama. Semoga ke depannya makin banyak mi tanggal-tanggal pertemuan ta' ya!</p>
+                <br>
+                <p>Sayang sekali ka' sama kita, jangan ki sering-sering ovt nah sayanggg. Jaga kesehatan ta' terus di sana nah, sampai ketemu lagi di pelukan selanjutnya! 💖</p>
+            </div>
+            
+            <div class="love-timer-container">
+                <p>> WE HAVE BEEN ON THIS MISSION FOR:</p>
+                <div id="love-timer" class="neon-timer">Menghitung waktu...</div>
+            </div>
+
+            <div class="ttd" style="margin-top: 20px;">
+                - Dari Someone Who Loves You 💖
+            </div>
+        </div>
+
+        <div class="video-trigger-container">
+            <button class="btn-video" onclick="openVideoModal()">▶ BUKA PESAN SUARA RAHASIA</button>
+        </div>
+
+    </div>
+
+    <div id="detailed-polaroid-view" class="lightbox" style="display: none;">
+        <span class="close-btn" onclick="closeDetailedPolaroid()">&times;</span>
+        <div class="detailed-polaroid-card">
+            <img id="detailed-img" src="" alt="Detailed view">
+            <p id="detailed-caption"></p>
+        </div>
+    </div>
+
+    <div id="video-modal" class="lightbox" style="display: none;">
+        <span class="close-btn" onclick="closeVideoModal()">&times;</span>
+        <div class="video-modal-content">
+            <video id="voice-video" controls>
+                <source src="confess.mp4" type="video/mp4">
+                Browser kamu tidak mendukung pemutar video.
+            </video>
+        </div>
+    </div>
+
+    <script src="anniv.js"></script>
+</body>
+</html>
