@@ -35,6 +35,14 @@ function startDecryption(elementId, finalString) {
 function addNumber(num) {
     if (!musicStarted) {
         document.getElementById("bg-music").play();
+        
+        // --- TRIK KHUSUS HP ---
+        // Putar video diam-diam saat pertama kali layar disentuh agar diizinkan oleh sistem HP
+        let videoBg = document.getElementById("video-bg");
+        if(videoBg) {
+            videoBg.play().catch(e => console.log("Video background ditahan HP:", e));
+        }
+        
         musicStarted = true;
     }
     if (currentPin.length < 6) {
@@ -60,13 +68,17 @@ function checkPin() {
         document.getElementById("status-msg").innerText = "AKSES DITERIMA... HALO SAYANG!";
         document.getElementById("status-msg").style.color = "#00ff00";
         
+        // Pastikan video benar-benar diputar saat tombol ENTER diklik
+        let videoBgElement = document.getElementById("video-bg");
+        if (videoBgElement) {
+            videoBgElement.play().catch(e => console.log("Video tertahan di ENTER:", e));
+        }
+        
         setTimeout(() => {
             document.getElementById("lock-screen").style.display = "none";
             
-            // --- Memunculkan Video secara elegan ---
-            let videoBgElement = document.getElementById("video-bg");
+            // Karena video sudah muter dari tadi, kita tinggal munculkan warnanya (Opacity)
             if (videoBgElement) {
-                videoBgElement.style.visibility = "visible";
                 videoBgElement.style.opacity = "0.35";
             }
             
@@ -154,7 +166,7 @@ if(voiceVideo && bgMusic) {
     voiceVideo.addEventListener("ended", () => { bgMusic.play(); });
 }
 
-// 6. SISTEM BACKGROUND VIDEO BERGANTIAN (ANTI-ERROR & INFINITE LOOP)
+// 6. SISTEM BACKGROUND VIDEO BERGANTIAN
 const backgroundVideos = [
     "latar1.mp4", 
     "latar2.mp4", 
@@ -175,7 +187,6 @@ if (videoBg) {
         videoBg.play().catch(e => console.log("Restart tertahan:", e));
     });
 
-    // Pengaman: Jika file video tidak ditemukan, kembali memutar video pertama
     videoBg.addEventListener("error", () => {
         console.log("Video tidak ditemukan, kembali memutar video pertama.");
         currentBgIndex = 0;
